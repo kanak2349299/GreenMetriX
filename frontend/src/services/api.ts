@@ -13,7 +13,10 @@ import {
   DataQualityResponse
 } from "../types";
 
-const API_BASE = "/api";
+const customApiUrl = (import.meta as any).env?.VITE_API_URL;
+const API_BASE = customApiUrl 
+  ? (customApiUrl.endsWith('/api') ? customApiUrl : `${customApiUrl}/api`)
+  : "/api";
 
 function getHeaders(): HeadersInit {
   const token = localStorage.getItem("gm_token");
